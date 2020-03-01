@@ -56,14 +56,22 @@ global $member1size;
 global $member2size;
 global $member3size;
 global $member4size;
+global $member1mac;
+global $member2mac;
+global $member3mac;
+global $member4mac;
      $membersizes=array("", "", "", "");
      $memberallergy=array("", "", "", "");
+     $membermacs=array("","","","");
     $tshirts=$_POST['t-shirts'];
     $allergies=$_POST['allergies'];
+    $macbook=$_POST['macbook'];
     $allergies=substr($allergies, 0, strlen($allergies)-1);
     $tshirts=substr($tshirts, 0, strlen($tshirts)-1);
+    $macs=substr($macbook, 0, strlen($macbook)-1);
     $ttt=array($tshirts,"","","","");
     $aaa=array($allergies,"","","","");
+    $mmm=array($macs,"","","","");
     for ($i=1; $i<$numberofpeople+1; $i++) {
         if ($i<$numberofpeople) {
         $int=strpos($ttt[$i-1],";");
@@ -86,6 +94,17 @@ global $member4size;
             $memberallergy[$j-1]=$aaa[$j-1];
         }
     }
+    for ($v=1; $v<$numberofpeople+1; $v++) {
+        if ($v<$numberofpeople) {
+        $int=strpos($mmm[$v-1],";");
+        $element=substr($mmm[$v-1], 0, $int);
+        $membermacs[$v-1]=$element;
+        $mmm[$v]=substr($mmm[$v-1], $int+2);
+        }
+        else {
+          $membermacs[$v-1]=$mmm[$v-1];
+        }
+    }
     $member1size=$membersizes[0];
     $member2size=$membersizes[1];
     $member3size=$membersizes[2];
@@ -94,7 +113,10 @@ global $member4size;
     $member2allergy=$memberallergy[1];
     $member3allergy=$memberallergy[2];
     $member4allergy=$memberallergy[3];
-
+    $member1mac=$membermacs[0];
+    $member2mac=$membermacs[1];
+    $member3mac=$membermacs[2];
+    $member4mac=$membermacs[3];
 ///////////////////////////////
     $link2 = mysqli_connect('localhost', 'root', 'THaaa123+', 'Peddie_Hackathon');
     $query2="INSERT INTO Peddie_Hackathon(Email, TeamName, SchoolName, TeamLeader,
@@ -103,9 +125,11 @@ global $member4size;
     '$member3', '$member4', $permissions)";
     $query3="INSERT INTO Additional_information(SchoolName, TeamName, Member1Allergy,
     Member2Allergy, Member3Allergy, Member4Allergy, Member1TShirtSize, 
-    Member2TShirtSize, Member3TShirtSize, Member4TShirtSize) VALUES
+    Member2TShirtSize, Member3TShirtSize, Member4TShirtSize, Member1Mac,
+    Member2Mac, Member3Mac, Member4Mac) VALUES
     ('$schoolname', '$teamname', '$member1allergy','$member2allergy','$member3allergy',
-    '$member4allergy','$member1size','$member2size','$member3size','$member4size')";
+    '$member4allergy','$member1size','$member2size','$member3size','$member4size', 
+    '$member1mac','$member2mac','$member3mac','$member4mac')";
     if(mysqli_query($link2, $query2)){
         if(mysqli_query($link2, $query3)) {
         $message12="Record Inserted Successfully";
