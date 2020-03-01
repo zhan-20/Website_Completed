@@ -70,6 +70,9 @@ textarea::-webkit-input-placeholder {
 	color: gray;
 	font-size:20px;
 }
+#instruction{
+	color:blue;
+}
 </style>
 <head>
 	<p class="head">Signing Up</p>
@@ -107,6 +110,11 @@ textarea::-webkit-input-placeholder {
 
 		<label for="T-shirt Sizes"><b>T-shirt Size for Members</b><span class="required">*</span></label>
 		<input id="t-shirts" type="text" name="t-shirts" placeholder="Enter T-shirt size of all team members in order; separate by a semicolon and a space; end with an exclamation mark." required></input>
+
+		<label for="Macbook Usage"><b>Will members use Macbooks for the contest?</b><span class="required">*</span></label>
+		<br>
+		<label id="instruction">(This is a question asked by one of our sponsors. You do not have to use a Macbook for the contest.) </label>
+		<input id="macbook" type="text" name="macbook" placeholder="Enter Yes or No for all team members in order; separate by a semicolon and a space; end with an exclamation mark." required onclick="func()"></input>
 
 		<label for="Allergies/Dietary Restrictions"><b>Does any member have an allergy?</b><span class="required">*</span></label>
 		<br><br>
